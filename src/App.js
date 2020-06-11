@@ -11,21 +11,26 @@ let mm = String(today.getMonth() + 1).padStart(2, '0');
 let yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 
-
-
 function App() {
-  const [date, setDate] = useState(today);
+  const [dateSelected, setDateSelected] = useState(today);
   const [imageOfDay, setImageOfDay] = useState([]);
-  const [api, setApi] = useState(nasaAPI)
+  const [api, setApi] = useState(nasaAPI + '&date=' + dateSelected)
+
   const handleChange = event => {
-    setDate(event.target.value);
-    console.log(event.target.value);
+    setDateSelected(event.target.value);
+    console.log('handleChange', dateSelected);
+    // setApi(nasaAPI + '&date=' + dateSelected);
   };
   const handleSubmit = event => {
     //event.preventDefault();
-    setApi(nasaAPI + '&date=' + date);
-    console.log('setApi', api);
+    setApi(nasaAPI + '&date=' + dateSelected);
+    console.log('handleSubmit', api)
   };
+
+  useEffect(() => {
+    handleSubmit(dateSelected);
+  }, [dateSelected]);
+
 
   useEffect(() => {
     axios.get(api)
@@ -36,7 +41,7 @@ function App() {
       .catch(error => {
         console.log('axios error: ', error);
       })
-  }, [])
+  }, [api])
 
   return (
     <div className='App'>
@@ -46,10 +51,8 @@ function App() {
       </p> */}
       {/* <Header /> */}
       <form onSubmit={handleSubmit}>
-        <label>
-          <input type="date" onChange={handleChange} />
-        </label>
-        <button type="submit">Submit</button>
+        <input type="date" value={dateSelected} onChange={handleChange} />
+        <button type="submit" value="Submit" >Submit</button>
       </form>
       <Hero imageOfDay={imageOfDay} />
       {/* <Main /> */}
