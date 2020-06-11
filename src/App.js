@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+//import './css/App.css';
 import axios from 'axios';
 import NASA_KEY from './config.js';
 import Hero from './components/Hero/Hero.js';
@@ -45,16 +45,8 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role='img' aria-label='go!'>🚀</span>!
-      </p> */}
       {/* <Header /> */}
-      <form onSubmit={handleSubmit}>
-        <input type="date" value={dateSelected} onChange={handleChange} />
-        <button type="submit" value="Submit" >Submit</button>
-      </form>
-      <Hero imageOfDay={imageOfDay} />
+      <Hero imageOfDay={imageOfDay} dateSelected={dateSelected} handleSubmit={handleSubmit} handleChange={handleChange} />
       {/* <Main /> */}
       {/* <Footer /> */}
     </div>
