@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Hero(props) {
-    console.log('hero', props);
+    //console.log('hero', props);
 
 
     if (!props.imageOfDay.url) return <h3>Loading...</h3>;

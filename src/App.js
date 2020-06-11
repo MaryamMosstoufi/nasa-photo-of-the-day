@@ -16,18 +16,19 @@ today = yyyy + '-' + mm + '-' + dd;
 function App() {
   const [date, setDate] = useState(today);
   const [imageOfDay, setImageOfDay] = useState([]);
+  const [api, setApi] = useState(nasaAPI)
   const handleChange = event => {
     setDate(event.target.value);
     console.log(event.target.value);
   };
   const handleSubmit = event => {
-    event.preventDefault();
-    setImageOfDay([date]);
-
+    //event.preventDefault();
+    setApi(nasaAPI + '&date=' + date);
+    console.log('setApi', api);
   };
 
   useEffect(() => {
-    axios.get(nasaAPI + '&date=' + date)
+    axios.get(api)
       .then(response => {
         setImageOfDay(response.data);
         console.log('axios response: ', response)
@@ -48,6 +49,7 @@ function App() {
         <label>
           <input type="date" onChange={handleChange} />
         </label>
+        <button type="submit">Submit</button>
       </form>
       <Hero imageOfDay={imageOfDay} />
       {/* <Main /> */}
