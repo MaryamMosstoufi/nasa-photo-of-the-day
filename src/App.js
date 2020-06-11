@@ -4,7 +4,7 @@ import axios from 'axios';
 import NASA_KEY from './config.js';
 import Hero from './components/Hero/Hero.js';
 
-const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY;
+const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY + '&date=2020-05-18';
 
 
 
@@ -17,7 +17,7 @@ function App() {
     axios.get(`${nasaAPI}`)
       .then(response => {
         setImageOfDay(response.data);
-        console.log('axios response: ', response.data)
+        console.log('axios response: ', response)
       })
       .catch(error => {
         console.log('axios error: ', error);
@@ -26,10 +26,12 @@ function App() {
 
   return (
     <div className='App'>
-      <p>
+      {/* <p>
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role='img' aria-label='go!'>🚀</span>!
-      </p>
+      </p> */}
+
+      {/* <img src={imageOfDay.url} /> */}
       {/* <Header /> */}
       <Hero imageOfDay={imageOfDay} />
       {/* <Main /> */}
