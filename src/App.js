@@ -4,17 +4,30 @@ import axios from 'axios';
 import NASA_KEY from './config.js';
 import Hero from './components/Hero/Hero.js';
 
-const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY + '&date=2020-05-18';
+const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY;
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
 
 
 
 function App() {
+  const [date, setDate] = useState(today);
   const [imageOfDay, setImageOfDay] = useState([]);
+  const handleChange = event => {
+    setDate(event.target.value);
+    console.log(event.target.value);
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    setImageOfDay([date]);
 
-
+  };
 
   useEffect(() => {
-    axios.get(`${nasaAPI}`)
+    axios.get(nasaAPI + '&date=' + date)
       .then(response => {
         setImageOfDay(response.data);
         console.log('axios response: ', response)
@@ -30,9 +43,12 @@ function App() {
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role='img' aria-label='go!'>🚀</span>!
       </p> */}
-
-      {/* <img src={imageOfDay.url} /> */}
       {/* <Header /> */}
+      <form onSubmit={handleSubmit}>
+        <label>
+          <input type="date" onChange={handleChange} />
+        </label>
+      </form>
       <Hero imageOfDay={imageOfDay} />
       {/* <Main /> */}
       {/* <Footer /> */}

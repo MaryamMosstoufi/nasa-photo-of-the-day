@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 function Hero(props) {
     console.log('hero', props);
 
-    if (!props.imageOfDay.url) return <h3>Loading...</h3>;
-    return (
 
+    if (!props.imageOfDay.url) return <h3>Loading...</h3>;
+
+
+    return (
         <div>
             <h2>{props.imageOfDay.title}</h2>
-            <div>{props.imageOfDay.date}</div>
+            {/* <div>{props.imageOfDay.date}</div> */}
+
             {(props.imageOfDay.media_type === "image") &&
                 <img src={props.imageOfDay.url} alt='' />
             }
