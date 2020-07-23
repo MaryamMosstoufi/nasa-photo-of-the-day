@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+//import './css/App.css';
 import axios from 'axios';
-import NASA_KEY from './config.js';
+//import NASA_KEY from './config.js';
 import Hero from './components/Hero/Hero.js';
+let NASA_KEY;
 
 const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY;
 let today = new Date();
@@ -31,7 +32,6 @@ function App() {
     handleSubmit(dateSelected);
   }, [dateSelected]);
 
-
   useEffect(() => {
     axios.get(api)
       .then(response => {
@@ -45,16 +45,8 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role='img' aria-label='go!'>🚀</span>!
-      </p> */}
       {/* <Header /> */}
-      <form onSubmit={handleSubmit}>
-        <input type="date" value={dateSelected} onChange={handleChange} />
-        <button type="submit" value="Submit" >Submit</button>
-      </form>
-      <Hero imageOfDay={imageOfDay} />
+      <Hero imageOfDay={imageOfDay} dateSelected={dateSelected} handleSubmit={handleSubmit} handleChange={handleChange} />
       {/* <Main /> */}
       {/* <Footer /> */}
     </div>
