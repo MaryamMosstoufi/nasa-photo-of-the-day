@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 //import './css/App.css';
 import axios from 'axios';
-import NASA_KEY from './config.js';
+//import NASA_KEY from './config.js';
 import Hero from './components/Hero/Hero.js';
+let NASA_KEY;
 
 const nasaAPI = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_KEY;
 let today = new Date();
@@ -30,7 +31,6 @@ function App() {
   useEffect(() => {
     handleSubmit(dateSelected);
   }, [dateSelected]);
-
 
   useEffect(() => {
     axios.get(api)
